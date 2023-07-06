@@ -35,7 +35,9 @@
 .inline-block {
   display: inline-block;
 }
-
+.mr-2 {
+  margin-right: 2px;
+}
 /* circular loader animations */
 @keyframes circularLoaderAnimation {
   0% {

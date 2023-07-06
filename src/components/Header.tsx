@@ -201,6 +201,7 @@ const Header = ({ sideMenu, setSideMenu }: HeaderProps) => {
       </Flex>
       {sideMenu && (
         <SideMenu
+          onOpen={onOpen}
           activeItem={activeItem}
           setActiveItem={setActiveItem}
           sideMenu={sideMenu}

@@ -8,6 +8,7 @@ import Video from "./pages/Video";
 import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./components/PrivateRoute";
 import Create from "./pages/Create";
+import Search from "./pages/Search";
 
 function App() {
   const [sideMenu, setSideMenu] = useState(false);
@@ -17,8 +18,9 @@ function App() {
         <Header sideMenu={sideMenu} setSideMenu={setSideMenu} />
         <ToastContainer />
         <Routes>
-          {/* <Route path="/" element={<Home />} index={true} /> */}
-          <Route path="/video/:videoid" element={<Video />} />
+          <Route path="/" element={<Home />} index={true} />
+          <Route path="/videos/:videoid" element={<Video />} />
+          <Route path="/search/:q" element={<Search />} />
           <Route path="" element={<PrivateRoute />}>
             <Route path="/create" element={<Create />} />
             <Route path="/profile" element={<Profile />} />

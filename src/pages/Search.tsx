@@ -11,14 +11,17 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useGetAllVideosQuery } from "../redux/videosApiSlice";
+import {
+  useGetAllVideosQuery,
+  useGetVideosByQueryQuery,
+} from "../redux/videosApiSlice";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Home = () => {
+const Search = () => {
+  const { q } = useParams();
   const navigate = useNavigate();
-  const { data: videos, isLoading } = useGetAllVideosQuery(["videos"]);
-
+  const { data: videos, isLoading } = useGetVideosByQueryQuery(q);
   return (
     <Box px={2} py={4}>
       <Grid templateColumns="repeat(auto-fit,minmax(300px,1fr))" gap={4}>
@@ -118,4 +121,4 @@ const Home = () => {
     </Box>
   );
 };
-export default Home;
+export default Search;

@@ -43,6 +43,9 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    getUserById: builder.query({
+      query: (userId) => `${USERS_URL}/user/${userId}`,
+    }),
   }),
 });
 
@@ -53,4 +56,5 @@ export const {
   useSubscribeMutation,
   useUnsubscribeMutation,
   useLogoutMutation,
+  useGetUserByIdQuery,
 } = authApiSlice;

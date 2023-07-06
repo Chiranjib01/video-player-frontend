@@ -3,27 +3,13 @@ import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-const sideMenuItems: { name: string; path: string }[] | [] = [
-  {
-    name: "Profile",
-    path: "/profile",
-  },
-  {
-    name: "Create",
-    path: "/create",
-  },
-  {
-    name: "Contact",
-    path: "/contact",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-];
+const sideMenuItems: { name: string; path: string }[] | [] = [];
 
 type SideMenuProps = {
+  onOpen: () => void;
   activeItem: string;
   setActiveItem: React.Dispatch<React.SetStateAction<string>>;
   sideMenu: boolean;
@@ -31,12 +17,34 @@ type SideMenuProps = {
 };
 
 const SideMenu = ({
+  onOpen,
   activeItem,
   setActiveItem,
   sideMenu,
   setSideMenu,
 }: SideMenuProps) => {
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state: any) => state.auth);
+  const [menuItems, setMenuItems] = useState<
+    { name: string; path: string }[] | never
+  >([]);
+  useEffect(() => {
+    if (userInfo) {
+      setMenuItems([
+        {
+          name: "Profile",
+          path: "/profile",
+        },
+        {
+          name: "Create",
+          path: "/create",
+        },
+        ...sideMenuItems,
+      ]);
+    } else {
+      setMenuItems(sideMenuItems);
+    }
+  }, [userInfo]);
   return (
     <>
       <Flex
@@ -73,8 +81,23 @@ const SideMenu = ({
             </Heading>
           </Flex>
           <Box my={16} />
+          {!userInfo && (
+            <Box
+              cursor={"pointer"}
+              textTransform={"capitalize"}
+              fontWeight={"semibold"}
+              borderRadius={5}
+              p={2}
+              marginBottom={2}
+              _hover={{ bg: "gray.300" }}
+              transition={"background-color 400ms ease-in-out"}
+              onClick={onOpen}
+            >
+              Login
+            </Box>
+          )}
           {/* other links */}
-          {sideMenuItems.map(({ name, path }) => (
+          {menuItems.map(({ name, path }) => (
             <Box
               key={path}
               cursor={"pointer"}

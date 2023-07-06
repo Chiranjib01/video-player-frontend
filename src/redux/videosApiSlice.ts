@@ -11,11 +11,23 @@ const videosApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    likeVideo: builder.mutation({
+      query: (videoId) => ({
+        url: `${VIDEOS_URL}/${videoId}/like`,
+        method: "POST",
+      }),
+    }),
     getAllVideos: builder.query({
-      query: () => `${VIDEOS_URL}/videos`,
+      query: () => `${VIDEOS_URL}`,
     }),
     getVideoById: builder.query({
-      query: (id) => `${VIDEOS_URL}/video?videoid=${id}`,
+      query: (videoId) => `${VIDEOS_URL}/${videoId}`,
+    }),
+    getVideosByUserId: builder.query({
+      query: (userId) => `${VIDEOS_URL}/user/${userId}`,
+    }),
+    getVideosByQuery: builder.query({
+      query: (text) => `${VIDEOS_URL}/search/?q=${text}`,
     }),
   }),
 });
@@ -24,4 +36,6 @@ export const {
   useCreateVideoMutation,
   useGetAllVideosQuery,
   useGetVideoByIdQuery,
+  useGetVideosByUserIdQuery,
+  useGetVideosByQueryQuery,
 } = videosApiSlice;
