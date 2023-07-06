@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  Image,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Container, Flex, Image, Text } from "@chakra-ui/react";
 import {
   useDeleteCommentMutation,
   useGetCommentsQuery,
