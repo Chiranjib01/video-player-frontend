@@ -17,6 +17,24 @@ const videosApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    unlikeVideo: builder.mutation({
+      query: (videoId) => ({
+        url: `${VIDEOS_URL}/${videoId}/unlike`,
+        method: "POST",
+      }),
+    }),
+    dislikeVideo: builder.mutation({
+      query: (videoId) => ({
+        url: `${VIDEOS_URL}/${videoId}/dislike`,
+        method: "POST",
+      }),
+    }),
+    undislikeVideo: builder.mutation({
+      query: (videoId) => ({
+        url: `${VIDEOS_URL}/${videoId}/undislike`,
+        method: "POST",
+      }),
+    }),
     getAllVideos: builder.query({
       query: () => `${VIDEOS_URL}`,
     }),
@@ -34,6 +52,10 @@ const videosApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useCreateVideoMutation,
+  useLikeVideoMutation,
+  useUnlikeVideoMutation,
+  useDislikeVideoMutation,
+  useUndislikeVideoMutation,
   useGetAllVideosQuery,
   useGetVideoByIdQuery,
   useGetVideosByUserIdQuery,

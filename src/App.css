@@ -38,6 +38,27 @@
 .mr-2 {
   margin-right: 2px;
 }
+.short-desc {
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.show-less-btn {
+  display: inline-block;
+  cursor: pointer;
+  color: #6c6d6d;
+  font-weight: 500;
+  font-family: "Times New Roman", Times, serif;
+  margin-top: 8px;
+  transition: color 300ms ease-in-out;
+}
+.show-less-btn:hover {
+  color: #303131;
+}
 /* circular loader animations */
 @keyframes circularLoaderAnimation {
   0% {
