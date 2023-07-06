@@ -11,10 +11,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import {
-  useGetAllVideosQuery,
-  useGetVideosByQueryQuery,
-} from "../redux/videosApiSlice";
+import { useGetVideosByQueryQuery } from "../redux/videosApiSlice";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 
