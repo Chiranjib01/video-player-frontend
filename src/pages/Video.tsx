@@ -38,6 +38,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../redux/authSlice";
 import ShareModal from "../components/ShareModal";
+import Comments from "../components/Comments";
 
 const Video = () => {
   const { videoid } = useParams();
@@ -380,8 +381,8 @@ const Video = () => {
                 </div>
               )}
             </Box>
-            <Text fontWeight={"semibold"}>100 Comments</Text>
           </Container>
+          <Comments videoId={video._id} />
         </>
       )}
     </>

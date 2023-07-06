@@ -59,6 +59,33 @@
 .show-less-btn:hover {
   color: #303131;
 }
+/* comment form */
+.comment-form-container {
+  display: flex;
+  margin: 20px auto 0 auto;
+}
+.comment-form-container .comment-input {
+  width: 100%;
+  padding: 6px 12px;
+  border-bottom: 1px solid #cdcbcb;
+  outline: none;
+}
+.comment-form-container button {
+  cursor: pointer;
+  padding: 6px 10px;
+  font-weight: 700;
+  color: #88e1f5;
+  transition: color 300ms ease-in-out;
+}
+.comment-form-container button:hover {
+  color: #25caef;
+}
+.dlt-btn {
+  color: red;
+  padding: 0 2px;
+  font-weight: 600;
+  cursor: pointer;
+}
 /* circular loader animations */
 @keyframes circularLoaderAnimation {
   0% {
