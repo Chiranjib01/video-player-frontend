@@ -109,10 +109,10 @@ const Register = ({ initialRef, onClose }: Props) => {
         <ModalBody pb={6}>
           {/* profile picture start */}
           <FormControl>
-            <FormLabel htmlFor="thumbnail">Thumbnail</FormLabel>
+            <FormLabel htmlFor="profilePicture">Profile Picture</FormLabel>
             <Input
               onChange={onImageChange}
-              id="thumbnail"
+              id="profilePicture"
               type="file"
               className="form-input"
             />
