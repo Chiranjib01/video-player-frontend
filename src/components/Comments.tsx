@@ -28,6 +28,7 @@ const Comments = ({ videoId }: Props) => {
       const comment: any = await postComment({ videoId, text }).unwrap();
       if (comment) {
         setComments([comment, ...comments]);
+        setText("");
         toast.success("Comment Added", { autoClose: 600 });
       }
     } catch (err) {}
