@@ -9,7 +9,12 @@ import { useLogoutMutation } from "../redux/authApiSlice";
 import { deleteCredentials } from "../redux/authSlice";
 import { toast } from "react-toastify";
 
-const sideMenuItems: { name: string; path: string }[] | [] = [];
+const sideMenuItems: { name: string; path: string }[] | [] = [
+  {
+    name: "Home",
+    path: "/",
+  },
+];
 
 type SideMenuProps = {
   onOpen: () => void;
@@ -47,6 +52,7 @@ const SideMenu = ({
   useEffect(() => {
     if (userInfo) {
       setMenuItems([
+        ...sideMenuItems,
         {
           name: "Profile",
           path: "/profile",
@@ -67,7 +73,6 @@ const SideMenu = ({
           name: "Liked Videos",
           path: "/likedvideos",
         },
-        ...sideMenuItems,
       ]);
     } else {
       setMenuItems(sideMenuItems);

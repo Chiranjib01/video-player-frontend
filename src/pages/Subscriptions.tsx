@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Subscriptions = () => {
+  const [loading, setLoading] = useState(false);
   const [channels, setChannels] = useState<any>([]);
   const { userInfo } = useSelector((state: any) => state.auth);
 
@@ -35,8 +36,10 @@ const Subscriptions = () => {
   };
 
   const setInfo = async () => {
+    setLoading(true);
     const info = await getChannels();
     setChannels(info);
+    setLoading(false);
   };
   useEffect(() => {
     setInfo();
@@ -48,9 +51,13 @@ const Subscriptions = () => {
         gap={4}
         my={10}
       >
-        {channels.length === 0 ? (
-          <Center mt={40}>
-            <Text fontSize={24}>No Channel Subscribed</Text>
+        {loading ? (
+          <Center my={20}>
+            <Text>Loading...</Text>
+          </Center>
+        ) : channels.length === 0 ? (
+          <Center mt={28}>
+            <Text fontSize={20}>No Channel Subscribed</Text>
           </Center>
         ) : (
           channels.map(

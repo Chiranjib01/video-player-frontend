@@ -24,6 +24,10 @@ const LikedVideos = () => {
           <Center my={20}>
             <Text>Loading...</Text>
           </Center>
+        ) : videos.length === 0 ? (
+          <Center mt={28}>
+            <Text fontSize={20}>You Haven&apos;t Liked!!</Text>
+          </Center>
         ) : (
           videos && (
             <Box>
