@@ -253,6 +253,7 @@ const Video = () => {
                     onClick={() => navigate(`/users/${channel._id}`)}
                     fontWeight={"semibold"}
                     cursor={"pointer"}
+                    className="truncate-1"
                   >
                     {channel.name}
                   </Text>

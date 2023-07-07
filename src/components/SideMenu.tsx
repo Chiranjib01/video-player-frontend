@@ -3,8 +3,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useLogoutMutation } from "../redux/authApiSlice";
+import { deleteCredentials } from "../redux/authSlice";
+import { toast } from "react-toastify";
 
 const sideMenuItems: { name: string; path: string }[] | [] = [];
 
@@ -24,10 +27,23 @@ const SideMenu = ({
   setSideMenu,
 }: SideMenuProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state: any) => state.auth);
   const [menuItems, setMenuItems] = useState<
     { name: string; path: string }[] | never
   >([]);
+
+  const [logout] = useLogoutMutation();
+  const logoutHandler = async () => {
+    try {
+      await logout(["videos"]);
+      dispatch(deleteCredentials());
+      toast.success("Logged out Successfully", { autoClose: 1000 });
+    } catch (err) {
+      toast.error("Logout Failed", { autoClose: 1000 });
+    }
+  };
+
   useEffect(() => {
     if (userInfo) {
       setMenuItems([
@@ -39,12 +55,25 @@ const SideMenu = ({
           name: "Create",
           path: "/create",
         },
+        {
+          name: "Subscriptions",
+          path: "/subscriptions",
+        },
+        {
+          name: "My Videos",
+          path: "/myvideos",
+        },
+        {
+          name: "Liked Videos",
+          path: "/likedvideos",
+        },
         ...sideMenuItems,
       ]);
     } else {
       setMenuItems(sideMenuItems);
     }
   }, [userInfo]);
+
   return (
     <>
       <Flex
@@ -118,6 +147,21 @@ const SideMenu = ({
               {name}
             </Box>
           ))}
+          {userInfo && (
+            <Box
+              cursor={"pointer"}
+              textTransform={"capitalize"}
+              fontWeight={"semibold"}
+              borderRadius={5}
+              p={2}
+              marginBottom={2}
+              _hover={{ bg: "gray.300" }}
+              transition={"background-color 400ms ease-in-out"}
+              onClick={logoutHandler}
+            >
+              Logout
+            </Box>
+          )}
         </Box>
         <Box
           bg={"gray.800"}

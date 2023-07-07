@@ -47,6 +47,12 @@ const videosApiSlice = apiSlice.injectEndpoints({
     getVideosByQuery: builder.query({
       query: (text) => `${VIDEOS_URL}/search/?q=${text}`,
     }),
+    getMyVideos: builder.query({
+      query: () => `${VIDEOS_URL}/me`,
+    }),
+    getLikedVideos: builder.query({
+      query: () => `${VIDEOS_URL}/liked/me`,
+    }),
   }),
 });
 
@@ -60,4 +66,6 @@ export const {
   useGetVideoByIdQuery,
   useGetVideosByUserIdQuery,
   useGetVideosByQueryQuery,
+  useGetMyVideosQuery,
+  useGetLikedVideosQuery,
 } = videosApiSlice;

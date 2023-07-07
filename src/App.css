@@ -86,6 +86,24 @@
   font-weight: 600;
   cursor: pointer;
 }
+.truncate-1 {
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.truncate-3 {
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 /* circular loader animations */
 @keyframes circularLoaderAnimation {
   0% {
