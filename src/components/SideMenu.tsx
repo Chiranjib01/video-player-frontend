@@ -54,10 +54,6 @@ const SideMenu = ({
       setMenuItems([
         ...sideMenuItems,
         {
-          name: "Profile",
-          path: "/profile",
-        },
-        {
           name: "Create",
           path: "/create",
         },
@@ -72,6 +68,10 @@ const SideMenu = ({
         {
           name: "Liked Videos",
           path: "/likedvideos",
+        },
+        {
+          name: "Profile",
+          path: "/profile",
         },
       ]);
     } else {

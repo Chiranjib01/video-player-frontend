@@ -9,11 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { useGetLikedVideosQuery } from "../redux/videosApiSlice";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const LikedVideos = () => {
   const { data: videos, isLoading } = useGetLikedVideosQuery(["videos"], {
     refetchOnMountOrArgChange: true,
   });
+  const navigate = useNavigate();
   return (
     <>
       <Center mt={6}>
@@ -33,34 +35,33 @@ const LikedVideos = () => {
             <Box>
               {videos.map(
                 ({ _id, thumbnail, title, description, createdAt }: any) => (
-                  <>
-                    <Flex
-                      key={_id}
-                      px={2}
-                      py={1}
-                      my={4}
-                      borderRadius={12}
-                      border={"1px solid"}
-                      borderColor={"gray.400"}
-                      cursor={"pointer"}
-                      boxShadow={"md"}
-                      transition={"box-shadow 400ms ease-in-out"}
-                      _hover={{
-                        boxShadow: "lg",
-                      }}
-                    >
-                      <Image src={thumbnail} h={"120px"} w={"150px"} mr={2} />
-                      <Box>
-                        <Text fontWeight={"semibold"} className="truncate-1">
-                          {title}
-                        </Text>
-                        <Text className="truncate-3">{description}</Text>
-                        <Text fontSize={"sm"} fontWeight={"semibold"} mt={1}>
-                          {moment(createdAt).format("DD MMMM YYYY")}
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </>
+                  <Flex
+                    onClick={() => navigate(`/videos/${_id}`)}
+                    key={_id}
+                    px={2}
+                    py={1}
+                    my={4}
+                    borderRadius={12}
+                    border={"1px solid"}
+                    borderColor={"gray.400"}
+                    cursor={"pointer"}
+                    boxShadow={"md"}
+                    transition={"box-shadow 400ms ease-in-out"}
+                    _hover={{
+                      boxShadow: "lg",
+                    }}
+                  >
+                    <Image src={thumbnail} h={"120px"} w={"150px"} mr={2} />
+                    <Box>
+                      <Text fontWeight={"semibold"} className="truncate-1">
+                        {title}
+                      </Text>
+                      <Text className="truncate-3">{description}</Text>
+                      <Text fontSize={"sm"} fontWeight={"semibold"} mt={1}>
+                        {moment(createdAt).format("DD MMMM YYYY")}
+                      </Text>
+                    </Box>
+                  </Flex>
                 )
               )}
             </Box>

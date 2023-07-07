@@ -115,7 +115,6 @@ const Create = () => {
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
-    console.log(user);
     if (loading) {
       return;
     }
@@ -136,14 +135,6 @@ const Create = () => {
     // save video
     try {
       setLoading(true);
-      console.log({
-        title,
-        description,
-        url,
-        thumbnail,
-        tags: stringToArray(tags),
-        userId: user._id,
-      });
       const video = await createVideo({
         title,
         description,

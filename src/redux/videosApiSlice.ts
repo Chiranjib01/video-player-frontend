@@ -53,6 +53,12 @@ const videosApiSlice = apiSlice.injectEndpoints({
     getLikedVideos: builder.query({
       query: () => `${VIDEOS_URL}/liked/me`,
     }),
+    deleteVideo: builder.mutation({
+      query: (videoId) => ({
+        url: `${VIDEOS_URL}/${videoId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -68,4 +74,5 @@ export const {
   useGetVideosByQueryQuery,
   useGetMyVideosQuery,
   useGetLikedVideosQuery,
+  useDeleteVideoMutation,
 } = videosApiSlice;

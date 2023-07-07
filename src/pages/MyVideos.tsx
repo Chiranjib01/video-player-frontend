@@ -7,11 +7,40 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { useGetMyVideosQuery } from "../redux/videosApiSlice";
+import {
+  useDeleteVideoMutation,
+  useGetMyVideosQuery,
+} from "../redux/videosApiSlice";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const MyVideos = () => {
-  const { data: videos, isLoading } = useGetMyVideosQuery(["videos"]);
+  const [videos, setVideos] = useState<any>([]);
+  const { data, isLoading } = useGetMyVideosQuery(["videos"]);
+  const navigate = useNavigate();
+  const [deleteVideo] = useDeleteVideoMutation();
+  const handleDelete = async (videoId: string) => {
+    if (!confirm("Are you sure?")) return;
+    try {
+      const video = await deleteVideo(videoId).unwrap();
+      if (video) {
+        const newVideos = videos.filter((item: any) => item._id !== videoId);
+        setVideos(newVideos);
+        toast.success("Video Deleted", { autoClose: 600 });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { autoClose: 600 });
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      setVideos(data);
+    }
+  }, [data]);
+
   return (
     <>
       <Center mt={6}>
@@ -31,34 +60,60 @@ const MyVideos = () => {
             <Box>
               {videos.map(
                 ({ _id, thumbnail, title, description, createdAt }: any) => (
-                  <>
-                    <Flex
-                      key={_id}
-                      px={2}
-                      py={1}
-                      my={4}
-                      borderRadius={12}
-                      border={"1px solid"}
-                      borderColor={"gray.400"}
-                      cursor={"pointer"}
-                      boxShadow={"md"}
-                      transition={"box-shadow 400ms ease-in-out"}
-                      _hover={{
-                        boxShadow: "lg",
-                      }}
-                    >
-                      <Image src={thumbnail} h={"120px"} w={"150px"} mr={2} />
-                      <Box>
-                        <Text fontWeight={"semibold"} className="truncate-1">
-                          {title}
-                        </Text>
-                        <Text className="truncate-3">{description}</Text>
-                        <Text fontSize={"sm"} fontWeight={"semibold"} mt={1}>
+                  <Flex
+                    key={_id}
+                    px={2}
+                    py={1}
+                    my={4}
+                    borderRadius={12}
+                    border={"1px solid"}
+                    borderColor={"gray.400"}
+                    cursor={"pointer"}
+                    boxShadow={"md"}
+                    transition={"box-shadow 400ms ease-in-out"}
+                    _hover={{
+                      boxShadow: "lg",
+                    }}
+                  >
+                    <Image
+                      src={thumbnail}
+                      h={["120px"]}
+                      w={["125px", "150px"]}
+                      mr={2}
+                      onClick={() => navigate(`/videos/${_id}`)}
+                    />
+                    <Box>
+                      <Text
+                        fontWeight={"semibold"}
+                        className="truncate-1"
+                        onClick={() => navigate(`/videos/${_id}`)}
+                      >
+                        {title}
+                      </Text>
+                      <Text
+                        className="truncate-3"
+                        onClick={() => navigate(`/videos/${_id}`)}
+                      >
+                        {description}
+                      </Text>
+                      <Flex justifyContent={"space-between"}>
+                        <Text
+                          fontSize={"sm"}
+                          fontWeight={"semibold"}
+                          mt={1}
+                          onClick={() => navigate(`/videos/${_id}`)}
+                        >
                           {moment(createdAt).format("DD MMMM YYYY")}
                         </Text>
-                      </Box>
-                    </Flex>
-                  </>
+                        <button
+                          className="dlt-btn"
+                          onClick={() => handleDelete(_id)}
+                        >
+                          Delete
+                        </button>
+                      </Flex>
+                    </Box>
+                  </Flex>
                 )
               )}
             </Box>

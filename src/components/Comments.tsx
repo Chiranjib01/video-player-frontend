@@ -50,7 +50,7 @@ const Comments = ({ videoId }: Props) => {
     setComments(data);
   }, [data]);
   return (
-    <Container maxW={"976px"} mb={10}>
+    <Container maxW={"976px"} mb={10} px={[1, 4]}>
       {comments && (
         <Text fontWeight={"semibold"}>{comments.length} Comments</Text>
       )}

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useGetVideosByUserIdQuery } from "../redux/videosApiSlice";
 import moment from "moment";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetUserByIdQuery } from "../redux/authApiSlice";
 import nFormatter from "../utils/nFormatter";
 
@@ -17,6 +17,7 @@ const ChannelProfile = () => {
   const { userId } = useParams();
   const { data: videos, isLoading } = useGetVideosByUserIdQuery(userId);
   const { data: user } = useGetUserByIdQuery(userId);
+  const navigate = useNavigate();
   return (
     <>
       {user && (
@@ -24,8 +25,8 @@ const ChannelProfile = () => {
           <Image
             mx={"auto"}
             src={user.profilePicture}
-            h={"160px"}
-            w={"160px"}
+            h={["100px", "160px"]}
+            w={["100px", "160px"]}
             borderRadius={"50%"}
           />
           <Text fontSize={"20px"} fontWeight={"semibold"} mt={2}>
@@ -36,7 +37,7 @@ const ChannelProfile = () => {
           </Text>
         </Box>
       )}
-      <Center mt={6}>
+      <Center mt={5}>
         <Heading fontSize={"xl"} fontFamily={"monospace"}>
           Videos
         </Heading>
@@ -53,6 +54,7 @@ const ChannelProfile = () => {
                 ({ _id, thumbnail, title, description, createdAt }: any) => (
                   <>
                     <Flex
+                      onClick={() => navigate(`/videos/${_id}`)}
                       key={_id}
                       px={2}
                       py={1}

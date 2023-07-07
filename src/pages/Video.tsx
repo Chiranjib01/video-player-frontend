@@ -194,7 +194,13 @@ const Video = () => {
     <>
       {isLoading ? (
         <>
-          <Box mx={"auto"} p={4} maxH={"80vh"} h={""} maxW={"container.lg"}>
+          <Box
+            mx={"auto"}
+            p={[1, 4]}
+            maxH={"80vh"}
+            h={""}
+            maxW={"container.lg"}
+          >
             <AspectRatio ratio={11 / 6}>
               <Skeleton></Skeleton>
             </AspectRatio>
@@ -211,7 +217,7 @@ const Video = () => {
             isOpen={isOpen}
             onClose={onClose}
           />
-          <Center p={4}>
+          <Center p={[1, 4]}>
             <video
               width={940}
               style={{
@@ -228,7 +234,7 @@ const Video = () => {
               <source src={video.url} type="video/mp4" />
             </video>
           </Center>
-          <Container maxW={"976px"} px={4} py={0}>
+          <Container maxW={"976px"} px={[1, 4]} py={0}>
             <Heading
               fontSize={"xl"}
               fontFamily="Times New Roman"
@@ -349,7 +355,7 @@ const Video = () => {
               </Flex>
             )}
           </Container>
-          <Container maxW={"976px"} px={4} py={2}>
+          <Container maxW={"976px"} px={[1, 4]} py={2}>
             <Flex alignItems={"center"} gap={2} flexWrap={"wrap"}>
               <Text fontWeight={"semibold"} fontSize={"sm"}>
                 {moment(video.createdAt).format("DD MMMM YYYY")}

@@ -62,63 +62,61 @@ const Subscriptions = () => {
         ) : (
           channels.map(
             ({ _id, name, subscriberCount, profilePicture }: any) => (
-              <>
-                <GridItem
-                  cursor={"pointer"}
-                  key={_id}
-                  h={60}
-                  w={"100%"}
-                  maxW={60}
+              <GridItem
+                cursor={"pointer"}
+                key={_id}
+                h={60}
+                w={"100%"}
+                maxW={60}
+                mx={"auto"}
+                bg={"white"}
+                shadow={"md"}
+                borderRadius={"lg"}
+                borderTop={"1px solid"}
+                borderColor={"gray.200"}
+                py={2}
+                transition={"box-shadow 300ms ease-in-out"}
+                _hover={{
+                  shadow: "xl",
+                }}
+                onClick={() => navigate(`/users/${_id}`)}
+              >
+                <Image
+                  borderTopRadius={"lg"}
                   mx={"auto"}
-                  bg={"white"}
-                  shadow={"md"}
-                  borderRadius={"lg"}
-                  borderTop={"1px solid"}
-                  borderColor={"gray.200"}
-                  py={2}
-                  transition={"box-shadow 300ms ease-in-out"}
-                  _hover={{
-                    shadow: "xl",
-                  }}
-                  onClick={() => navigate(`/users/${_id}`)}
-                >
-                  <Image
-                    borderTopRadius={"lg"}
-                    mx={"auto"}
-                    h={"170px"}
-                    w={"80%"}
-                    borderRadius={20}
-                    src={profilePicture}
-                  ></Image>
-                  <Flex h={"70px"} alignItems={"center"}>
-                    <Box flex={1} maxH={"70px"}>
-                      <Text
-                        fontSize={"sm"}
-                        fontWeight={"semibold"}
-                        textAlign={"center"}
-                        style={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "-webkit-box",
-                          lineClamp: 2,
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        {name}
-                      </Text>
-                      <Flex
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        gap={2}
-                      >
-                        Subscribers :
-                        <Text fontFamily={"sm"}>{subscriberCount}</Text>
-                      </Flex>
-                    </Box>
-                  </Flex>
-                </GridItem>
-              </>
+                  h={"170px"}
+                  w={"80%"}
+                  borderRadius={20}
+                  src={profilePicture}
+                ></Image>
+                <Flex h={"70px"} alignItems={"center"}>
+                  <Box flex={1} maxH={"70px"}>
+                    <Text
+                      fontSize={"sm"}
+                      fontWeight={"semibold"}
+                      textAlign={"center"}
+                      style={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        lineClamp: 2,
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {name}
+                    </Text>
+                    <Flex
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      gap={2}
+                    >
+                      Subscribers :
+                      <Text fontFamily={"sm"}>{subscriberCount}</Text>
+                    </Flex>
+                  </Box>
+                </Flex>
+              </GridItem>
             )
           )
         )}
