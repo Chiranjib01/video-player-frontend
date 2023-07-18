@@ -19,6 +19,9 @@ const Search = () => {
   const { q } = useParams();
   const navigate = useNavigate();
   const { data: videos, isLoading } = useGetVideosByQueryQuery(q);
+
+  document.title = `Search - ${q}`;
+
   return (
     <Box px={2} py={4}>
       <Grid templateColumns="repeat(auto-fit,minmax(300px,1fr))" gap={4}>

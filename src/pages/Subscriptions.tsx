@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { API_URL } from "../utils/constants";
+import { API_URL, APP_NAME } from "../utils/constants";
 import { toast } from "react-toastify";
 import {
   Box,
@@ -44,6 +44,9 @@ const Subscriptions = () => {
   useEffect(() => {
     setInfo();
   }, [userInfo]);
+
+  document.title = `${APP_NAME} - Subscriptions`;
+
   return (
     <>
       <Grid

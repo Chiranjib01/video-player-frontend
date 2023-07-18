@@ -10,12 +10,16 @@ import {
 import { useGetLikedVideosQuery } from "../redux/videosApiSlice";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { APP_NAME } from "../utils/constants";
 
 const LikedVideos = () => {
   const { data: videos, isLoading } = useGetLikedVideosQuery(["videos"], {
     refetchOnMountOrArgChange: true,
   });
   const navigate = useNavigate();
+
+  document.title = `${APP_NAME} - Liked Videos`;
+
   return (
     <>
       <Center mt={6}>

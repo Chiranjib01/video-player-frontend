@@ -14,11 +14,12 @@ import {
 import { useGetAllVideosQuery } from "../redux/videosApiSlice";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { APP_NAME } from "../utils/constants";
 
 const Home = () => {
   const navigate = useNavigate();
   const { data: videos, isLoading } = useGetAllVideosQuery(["videos"]);
-
+  document.title = `${APP_NAME} - Home`;
   return (
     <Box px={2} py={4}>
       <Grid templateColumns="repeat(auto-fit,minmax(300px,1fr))" gap={4}>

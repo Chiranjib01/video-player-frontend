@@ -9,15 +9,20 @@ import {
 } from "@chakra-ui/react";
 import { useGetVideosByUserIdQuery } from "../redux/videosApiSlice";
 import moment from "moment";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetUserByIdQuery } from "../redux/authApiSlice";
 import nFormatter from "../utils/nFormatter";
+import { APP_NAME } from "../utils/constants";
 
 const ChannelProfile = () => {
   const { userId } = useParams();
   const { data: videos, isLoading } = useGetVideosByUserIdQuery(userId);
   const { data: user } = useGetUserByIdQuery(userId);
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = user && user.name ? user.name : APP_NAME;
+  }, [user]);
   return (
     <>
       {user && (

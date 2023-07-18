@@ -18,6 +18,7 @@ import Loading from "../components/Loading";
 import { setCredentials } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "../redux/authApiSlice";
+import { APP_NAME } from "../utils/constants";
 
 const Profile = () => {
   const { userInfo } = useSelector((state: any) => state.auth);
@@ -105,6 +106,9 @@ const Profile = () => {
       toast.error(err?.data?.message || err.error, { autoClose: 1000 });
     }
   };
+
+  document.title = `${APP_NAME} - Update Profile`;
+
   return (
     <Container>
       <Center pt={4}>

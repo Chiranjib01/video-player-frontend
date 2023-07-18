@@ -103,6 +103,7 @@ const Register = ({ initialRef, onClose }: Props) => {
       toast.error(err?.data?.message || err.error, { autoClose: 1000 });
     }
   };
+
   return (
     <>
       <form onSubmit={handleRegister}>

@@ -15,6 +15,7 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { APP_NAME } from "../utils/constants";
 
 const MyVideos = () => {
   const [videos, setVideos] = useState<any>([]);
@@ -40,6 +41,8 @@ const MyVideos = () => {
       setVideos(data);
     }
   }, [data]);
+
+  document.title = `${APP_NAME} - My Videos`;
 
   return (
     <>

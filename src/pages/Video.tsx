@@ -28,7 +28,7 @@ import {
   AiFillDislike,
 } from "react-icons/ai";
 import { useState, useEffect } from "react";
-import { API_URL } from "../utils/constants";
+import { API_URL, APP_NAME } from "../utils/constants";
 import { toast } from "react-toastify";
 import nFormatter from "../utils/nFormatter";
 import {
@@ -189,6 +189,10 @@ const Video = () => {
       setLikes(video.likes.length);
     }
   }, [video, isSubscribed, userInfo]);
+
+  useEffect(() => {
+    document.title = video && video.title ? video.title : APP_NAME;
+  }, [video]);
 
   return (
     <>

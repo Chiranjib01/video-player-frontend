@@ -18,6 +18,7 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
+import { APP_NAME } from "../utils/constants";
 
 const Create = () => {
   const { userInfo: user } = useSelector((state: any) => state.auth);
@@ -156,6 +157,8 @@ const Create = () => {
       toast.success("Some error occured", { autoClose: 1000 });
     }
   };
+
+  document.title = `${APP_NAME} - Create`;
 
   return (
     <Container my={6}>
