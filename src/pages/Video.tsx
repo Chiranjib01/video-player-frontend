@@ -96,7 +96,11 @@ const Video = () => {
       } else {
         toast.error("Something went wrong", { autoClose: 600 });
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.status === 401) {
+        toast.error("Login to Like", { autoClose: 1000 });
+        return;
+      }
       toast.error("Something went wrong", { autoClose: 600 });
     }
   };
@@ -131,7 +135,11 @@ const Video = () => {
       } else {
         toast.error("Something went wrong", { autoClose: 600 });
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.status === 401) {
+        toast.error("Login to Dislike", { autoClose: 1000 });
+        return;
+      }
       toast.error("Something went wrong", { autoClose: 600 });
     }
   };
@@ -139,10 +147,6 @@ const Video = () => {
     if (!isDisLiked) return;
     try {
       const resp = await undislikeVideoApiCall(videoId).unwrap();
-      if (resp.status === 401) {
-        toast.error("Login to Like", { autoClose: 1000 });
-        return;
-      }
       if (resp) {
         toast.success("DisLike Removed", { autoClose: 600 });
         setIsDisLiked(false);
@@ -159,10 +163,6 @@ const Video = () => {
     if (isSubscribed) return;
     try {
       const resp = await subscribeApiCall(channelId).unwrap();
-      if (resp.status === 401) {
-        toast.error("Login to Subscribe", { autoClose: 1000 });
-        return;
-      }
       if (resp.user) {
         toast.success("Channel Subscribed", { autoClose: 1000 });
         dispatch(setCredentials({ ...resp.user }));
@@ -170,7 +170,11 @@ const Video = () => {
       } else {
         toast.error("Something went wrong", { autoClose: 1000 });
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.status === 401) {
+        toast.error("Login to Subscribe", { autoClose: 1000 });
+        return;
+      }
       toast.error("Something went wrong", { autoClose: 1000 });
     }
   };
@@ -178,10 +182,6 @@ const Video = () => {
     if (!isSubscribed) return;
     try {
       const resp = await unSubscribeApiCall(channelId).unwrap();
-      if (resp.status === 401) {
-        toast.error("Login to Unsubscribe", { autoClose: 1000 });
-        return;
-      }
       if (resp.user) {
         dispatch(setCredentials({ ...resp.user }));
         toast.success("Channel Unsubscribed", { autoClose: 1000 });
@@ -189,7 +189,11 @@ const Video = () => {
       } else {
         toast.error("Something went wrong", { autoClose: 1000 });
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.status === 401) {
+        toast.error("Login to Unsubscribe", { autoClose: 1000 });
+        return;
+      }
       toast.error("Something went wrong", { autoClose: 1000 });
     }
   };
