@@ -120,6 +120,10 @@ const Video = () => {
     if (isDisLiked || isLiked) return;
     try {
       const resp = await dislikeVideoApiCall(videoId).unwrap();
+      if (resp.status === 401) {
+        toast.error("Login to Dislike", { autoClose: 1000 });
+        return;
+      }
       if (resp) {
         toast.success("DisLiked", { autoClose: 600 });
         setIsDisLiked(true);
@@ -135,6 +139,10 @@ const Video = () => {
     if (!isDisLiked) return;
     try {
       const resp = await undislikeVideoApiCall(videoId).unwrap();
+      if (resp.status === 401) {
+        toast.error("Login to Like", { autoClose: 1000 });
+        return;
+      }
       if (resp) {
         toast.success("DisLike Removed", { autoClose: 600 });
         setIsDisLiked(false);
@@ -151,6 +159,10 @@ const Video = () => {
     if (isSubscribed) return;
     try {
       const resp = await subscribeApiCall(channelId).unwrap();
+      if (resp.status === 401) {
+        toast.error("Login to Subscribe", { autoClose: 1000 });
+        return;
+      }
       if (resp.user) {
         toast.success("Channel Subscribed", { autoClose: 1000 });
         dispatch(setCredentials({ ...resp.user }));
@@ -166,6 +178,10 @@ const Video = () => {
     if (!isSubscribed) return;
     try {
       const resp = await unSubscribeApiCall(channelId).unwrap();
+      if (resp.status === 401) {
+        toast.error("Login to Unsubscribe", { autoClose: 1000 });
+        return;
+      }
       if (resp.user) {
         dispatch(setCredentials({ ...resp.user }));
         toast.success("Channel Unsubscribed", { autoClose: 1000 });
@@ -217,7 +233,7 @@ const Video = () => {
       ) : (
         <>
           <ShareModal
-            url={`https://videoplayer-00.vercel.app/videos/${video._id}`}
+            url={`https://vidster.vercel.app/videos/${video._id}`}
             isOpen={isOpen}
             onClose={onClose}
           />
